@@ -23,6 +23,7 @@ model Course {
   categoryId String?
   category   Category? @relation(fields: [categoryId], references: [id])
 
+  chapters Chapter[]
   attachments Attachment[]
 
   createdAt DateTime @default(now())
@@ -69,6 +70,7 @@ model Chapter {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  @@index([courseId])
 }
 
 model MuxData {
@@ -78,4 +80,20 @@ model MuxData {
 
   chapterId String  @unique
   chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+}
+
+model UserProgress{
+  id String @id @default(uuid())
+  userId String
+
+  chapterId String
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  isCompleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([chapterId])
+  @@unique([userId, chapterId])
 }
