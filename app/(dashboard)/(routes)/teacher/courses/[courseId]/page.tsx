@@ -14,6 +14,7 @@ import { ImageForm } from "./_comps/image-form";
 import { CategoryForm } from "./_comps/category-form";
 import { PriceForm } from "./_comps/price-form";
 import { AttachmentForm } from "./_comps/attachment-form";
+import { ChaptersForm } from "./_comps/chapters-form";
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const { userId } = auth();
@@ -87,12 +88,12 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                 <IconBadge icon={ListChecks} />
                 <h2 className="text-xl">Course Chapters</h2>
               </div>
-              <div>TODO : Chapters</div>
+              <ChaptersForm initialData={course} courseId={course.id} />
             </div>
             <div>
               <div className="flex items-center gap-x-2">
                 <IconBadge icon={CircleDollarSign} />
-                <h2 className="text-xl">Sell Your Course</h2>
+                <h2 className="text-xl">Set Course Price</h2>
               </div>
               <PriceForm initialData={course} courseId={course.id} />
             </div>
