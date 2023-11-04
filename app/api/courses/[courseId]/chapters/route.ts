@@ -8,7 +8,7 @@ export async function POST(
 ) {
   try {
     const { userId } = auth();
-    const [title] = await req.json();
+    const {title} = await req.json();
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -41,6 +41,7 @@ export async function POST(
       },
     });
     return NextResponse.json(chapter);
+    // catch error
   } catch (error) {
     console.log("[CHAPTERS]", error);
     return new NextResponse("Internal Error", { status: 500 });
