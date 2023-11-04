@@ -21,7 +21,7 @@ import { Chapter, Course } from "@prisma/client";
 import { Input } from "@/components/ui/input";
 
 interface ChaptersFormProps {
-  initialData: Course & {chapters: Chapter[]};
+  initialData: Course & { chapters: Chapter[] };
   courseId: string;
 }
 
@@ -30,8 +30,8 @@ const formSchema = z.object({
 });
 
 export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
-  const [isUpdating, setIsUpdating] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
   const toggleCreating = () => {
     setIsCreating((current) => !current);
   };
@@ -101,7 +101,12 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
           </Form>
         )}
         {!isCreating && (
-          <div className={cn("text-sm mt-2",!initialData.chapters.length && "text-slate-500 italic")}>
+          <div
+            className={cn(
+              "text-sm mt-2",
+              !initialData.chapters.length && "text-slate-500 italic"
+            )}
+          >
             {!initialData.chapters.length && "No Chapters"}
             {/* TODO: ADD A LIST OF CHAPTERS */}
           </div>

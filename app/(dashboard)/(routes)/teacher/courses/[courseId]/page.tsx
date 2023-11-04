@@ -25,13 +25,13 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const course = await db.course.findUnique({
     where: {
       id: params.courseId,
-      userId
+      userId,
     },
     include: {
       chapters: {
         orderBy: {
-          position: "asc"
-        }
+          position: "asc",
+        },
       },
       attachments: {
         orderBy: {
@@ -54,7 +54,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
     course.imageUrl,
     course.price,
     course.categoryId,
-    course.chapters.some(chapter => chapter.isPublished)
+    course.chapters.some((chapter) => chapter.isPublished),
   ];
 
   const totalFields = requireFields.length;
@@ -90,6 +90,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             />
           </div>
           <div className="space-y-6">
+            {/* course chapters */}
             <div>
               <div className="flex items-center gap-x-2">
                 <IconBadge icon={ListChecks} />
@@ -97,6 +98,8 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
               </div>
               <ChaptersForm initialData={course} courseId={course.id} />
             </div>
+            {/* course chapters end */}
+            {/* course price */}
             <div>
               <div className="flex items-center gap-x-2">
                 <IconBadge icon={CircleDollarSign} />
@@ -104,6 +107,8 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
               </div>
               <PriceForm initialData={course} courseId={course.id} />
             </div>
+            {/* course price ends */}
+            {/* resources & attachments */}
             <div>
               <div className="flex items-center gap-x-2">
                 <IconBadge icon={File} />
@@ -111,6 +116,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
               </div>
               <AttachmentForm initialData={course} courseId={course.id} />
             </div>
+            {/* resources & attachments end */}
           </div>
         </div>
       </div>
